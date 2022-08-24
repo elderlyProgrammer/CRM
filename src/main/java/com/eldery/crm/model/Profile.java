@@ -15,6 +15,9 @@ public class Profile extends BaseEntity{
     @Column(name = "description")
     private String description;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     public Profile() {
     }
 

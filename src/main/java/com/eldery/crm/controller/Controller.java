@@ -36,11 +36,9 @@ public class Controller {
     }
 
 
-    @GetMapping("profile/{userName}")
-    public ResponseEntity<User> getUserProfile(@PathVariable(name = "userName") String userName) {
-        User user;
-        final JwtAuthentication authInfo = authService.getAuthInfo();
-        user = userService.getByLogin(authInfo.getUsername());
+    @GetMapping("profile/{name}")
+    public ResponseEntity<User> getUserProfile(@PathVariable(name = "name") String userName) {
+        User user = userService.getByLogin(userName);
         return ResponseEntity.ok(user);
     }
 
