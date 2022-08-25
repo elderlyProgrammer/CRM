@@ -1,6 +1,7 @@
 package com.eldery.crm.controller;
 
 import com.eldery.crm.dto.CompanyDto;
+import com.eldery.crm.dto.CompanyDtoFactory;
 import com.eldery.crm.model.Company;
 import com.eldery.crm.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,9 @@ public class CompanyController {
 
 
     @GetMapping("/{id}")
-    public Company findCompanyById(@PathVariable(name = "id") Long id) {
-        return companyService.findCompanyById(id);
+    public ResponseEntity<CompanyDto> findCompanyById(@PathVariable(name = "id") Long id) {
+        Company company = companyService.findCompanyById(id);
+        return ResponseEntity.ok(CompanyDtoFactory.createDtoFromCompany(company));
     }
 
     @GetMapping("/{page}/{count}")
