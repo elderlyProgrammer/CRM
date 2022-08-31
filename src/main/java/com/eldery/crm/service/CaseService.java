@@ -1,7 +1,6 @@
 package com.eldery.crm.service;
 
 import com.eldery.crm.model.Case;
-import com.eldery.crm.model.Company;
 import com.eldery.crm.repository.CaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,9 +19,7 @@ public class CaseService {
     }
 
     public Page<Case> getPage(int page, int count) {
-
-            return caseRepository.findAll(PageRequest.of(page, count));
-
+        return caseRepository.findAll(PageRequest.of(page, count));
     }
 
 }

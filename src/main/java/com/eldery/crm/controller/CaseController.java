@@ -25,7 +25,7 @@ public class CaseController {
         return ResponseEntity.ok(caseDto);
     }
 
-    @GetMapping("/")
+    @GetMapping({"/", ""})
     public ResponseEntity<Map<String, Object>> getPage() {
         return getPageResponseEntity(0, 10);
     }
@@ -34,7 +34,7 @@ public class CaseController {
     public ResponseEntity<Map<String, Object>> getPage(
             @PathVariable(name = "page") int page,
             @PathVariable(name = "count") int count) {
-        return getPageResponseEntity(page, count);
+        return getPageResponseEntity(page - 1, count);
     }
 
     private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {

@@ -1,32 +1,20 @@
 package com.eldery.crm.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
-
 @Entity
-@NoArgsConstructor
-@Getter
-@Setter
-@Table(name = "cases")
-public class Case extends BaseEntity{
+@Table(name = "contracts")
+public class Contract extends BaseEntity {
     @Column(name = "description")
     private String description;
-    @Column(name = "start_date")
-    private Date startDate;
-    @Column(name = "end_date")
-    private Date endDate;
+    @Column(name = "date")
+    private Date date;
+    @Column(name = "amount")
+    private Long amount;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "case_type_id", referencedColumnName = "id")
-    private CaseType caseType;
-
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 

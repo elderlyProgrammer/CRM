@@ -7,9 +7,7 @@ import com.eldery.crm.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,8 +16,8 @@ import javax.xml.crypto.Data;
 public class CaseDto {
 
     private String description;
-    private Data startDate;
-    private Data endDate;
+    private Date startDate;
+    private Date endDate;
     private CaseType caseType;
     private Company company;
     private Person person;

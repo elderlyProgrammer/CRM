@@ -28,22 +28,29 @@ public class CompanyController {
     }
 
     @GetMapping("/{page}/{count}")
-    public ResponseEntity<Map<Object, Object>> getPage(
+    public ResponseEntity<Map<String, Object>> getPage(
             @PathVariable(name = "page") int page,
             @PathVariable(name = "count") int count) {
 
-        Map<Object, Object> resp = new HashMap<>();
-        if ((page == 0)&&(count==0)) count = 10;
-        Page<Company> pages = companyService.getPage(page - 1, count);
-        resp.put("count", pages.getTotalPages());
-        resp.put("page", pages.stream().map(Company::getSimple).toList());
+        return getPageResponseEntity(page, count);
+    }
 
-        return ResponseEntity.ok(resp);
+    @GetMapping({"/", ""})
+    public ResponseEntity<Map<String, Object>> getPage() {
+        return getPageResponseEntity(1, 10);
     }
 
     @PostMapping("/add")
     public void addCompany(@RequestBody CompanyDto company) {
         companyService.save(company);
+    }
+
+    private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {
+        Page<Company> companies = companyService.getPage(page - 1, count);
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", companies.getTotalPages());
+        map.put("page", companies.stream().map(CompanyDtoFactory::createDtoFromCompany).toList());
+        return ResponseEntity.ok(map);
     }
 
 
