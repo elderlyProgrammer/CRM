@@ -18,5 +18,4 @@ public class Person extends BaseEntity {
     @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<PersonCompanyPositionLink> companies;
 
-
 }

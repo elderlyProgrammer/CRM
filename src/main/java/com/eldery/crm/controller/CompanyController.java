@@ -23,7 +23,8 @@ public class CompanyController {
     @GetMapping("/{id}")
     public ResponseEntity<CompanyDto> findCompanyById(@PathVariable(name = "id") Long id) {
         Company company = companyService.findCompanyById(id);
-        return ResponseEntity.ok(CompanyDtoFactory.createDtoFromCompany(company));
+        CompanyDto dto = CompanyDtoFactory.createDtoFromCompany(company);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/{page}/{count}")
