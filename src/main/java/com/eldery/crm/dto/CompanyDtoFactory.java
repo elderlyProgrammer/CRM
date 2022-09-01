@@ -26,6 +26,7 @@ public class CompanyDtoFactory {
                     Map<String, String> map = new HashMap<>();
                     map.put("id", x.getId().toString());
                     map.put("description", x.getDescription());
+                    map.put("number", x.getNumber());
                     companyDto.getContracts().add(map);
                 });
         company.getCases()

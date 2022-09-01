@@ -1,8 +1,11 @@
 package com.eldery.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -26,6 +29,14 @@ public class Person extends BaseEntity {
 
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    @JsonIgnore
+    public Map<String, String> getSimple() {
+        Map<String, String> map = new HashMap<>();
+        map.put("id",this.getId().toString());
+        map.put("name", getFullName());
+        return map;
     }
 
 }

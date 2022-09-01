@@ -10,9 +10,14 @@ public class ContractDtoFactory {
         contractDto.setAmount(contract.getAmount());
         contractDto.setDate(contract.getDate());
         contractDto.setNumber(contract.getNumber());
-        contractDto.getCompany().put(contract.getCompany().getId(),contract.getCompany().getName());
-        contractDto.getPerson().put(contract.getPerson().getId(), contract.getPerson().getFullName());
-        contractDto.getResponsible().put(contract.getResponsible().getId(), contract.getResponsible().getFullName());
+        if (contract.getCompany() != null) {
+            contractDto.getCompany().add(contract.getCompany().getSimple());
+        }
+
+        if (contract.getPerson() != null) {
+            contractDto.getPerson().add(contract.getPerson().getSimple());
+        }
+        contractDto.getResponsible().add(contract.getResponsible().getSimple());
         return contractDto;
     }
 }

@@ -5,6 +5,8 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,5 +50,10 @@ public class User extends BaseEntity {
     }
 
 
-
+    public Map<String, String> getSimple() {
+        Map<String,String> map = new HashMap<>();
+        map.put("id", getId().toString());
+        map.put("name", getFullName());
+        return map;
+    }
 }

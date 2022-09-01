@@ -1,13 +1,11 @@
 package com.eldery.crm.dto;
 
-import com.eldery.crm.model.CaseType;
-import com.eldery.crm.model.Company;
-import com.eldery.crm.model.Person;
-import com.eldery.crm.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -18,10 +16,10 @@ public class CaseDto {
     private String description;
     private Date startDate;
     private Date endDate;
-    private CaseType caseType;
-    private Company company;
-    private Person person;
-    private User responsible;
+    private Map<String, String> caseType = new HashMap<>();
+    private Map<String, String> company = new HashMap<>();
+    private Map<String, String> person = new HashMap<>();
+    private Map<String, String> responsible = new HashMap<>();
     private String number;
 
 

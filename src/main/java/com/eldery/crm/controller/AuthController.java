@@ -5,8 +5,11 @@ import com.eldery.crm.jwt.JwtResponse;
 import com.eldery.crm.jwt.RefreshJwtRequest;
 import com.eldery.crm.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("api/auth")
@@ -16,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authRequest) {
+    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authRequest, HttpServletResponse response) {
         final JwtResponse token = authService.login(authRequest);
         return ResponseEntity.ok(token);
     }

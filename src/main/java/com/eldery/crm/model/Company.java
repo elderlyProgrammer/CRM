@@ -42,9 +42,10 @@ public class Company extends BaseEntity{
 
 
     @JsonIgnore
-    public Map<Long, String> getSimple() {
-        Map<Long, String> map = new HashMap<>();
-        map.put(this.getId(), this.getName());
+    public Map<String, String> getSimple() {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", getId().toString());
+        map.put("name", getName());
         return map;
     }
 
