@@ -25,10 +25,11 @@ public class AuthService {
     private final Map<String, String> refreshStorage = new HashMap<>();
     private final JwtProvider jwtProvider;
 
-    public JwtResponse login(@NonNull JwtRequest authRequest) {
+    public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException{
         final User user = userService.getByLogin(authRequest.getLogin());
         if (user == null) {
-            throw new AuthException("User: " + authRequest.getLogin() + " not found");
+            String info = "User: " + authRequest.getLogin() + " not found";
+            throw new AuthException(info);
         }
 
         if (user.getPassword().equals(authRequest.getPassword())) {

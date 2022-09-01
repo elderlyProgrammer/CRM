@@ -1,15 +1,19 @@
 package com.eldery.crm.controller;
 
+import com.eldery.crm.exception.AuthException;
 import com.eldery.crm.jwt.JwtRequest;
 import com.eldery.crm.jwt.JwtResponse;
 import com.eldery.crm.jwt.RefreshJwtRequest;
 import com.eldery.crm.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/auth")
@@ -19,9 +23,16 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authRequest, HttpServletResponse response) {
-        final JwtResponse token = authService.login(authRequest);
-        return ResponseEntity.ok(token);
+    public ResponseEntity login(@RequestBody JwtRequest authRequest, HttpServletResponse response) {
+        try {
+            final JwtResponse token = authService.login(authRequest);
+            return ResponseEntity.ok(token);
+        } catch (AuthException exception) {
+            Map<String, String> map = new HashMap<>();
+            map.put("error", "Не верный логин или пароль");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
+        }
+
     }
 
     @PostMapping("token")
