@@ -34,6 +34,13 @@ public class Company extends BaseEntity{
     @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<PersonCompanyPositionLink> persons;
 
+    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private Set<Contract> contracts;
+
+    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private Set<Case> cases;
+
+
     @JsonIgnore
     public Map<Long, String> getSimple() {
         Map<Long, String> map = new HashMap<>();

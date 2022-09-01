@@ -18,4 +18,14 @@ public class Person extends BaseEntity {
     @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<PersonCompanyPositionLink> companies;
 
+    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private Set<Contract> contracts;
+
+    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private Set<Case> cases;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
 }

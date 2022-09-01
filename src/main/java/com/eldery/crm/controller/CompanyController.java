@@ -49,7 +49,7 @@ public class CompanyController {
         Page<Company> companies = companyService.getPage(page - 1, count);
         Map<String, Object> map = new HashMap<>();
         map.put("count", companies.getTotalPages());
-        map.put("page", companies.stream().map(CompanyDtoFactory::createDtoFromCompany).toList());
+        map.put("page", companies.stream().map(Company::getSimple).toList());
         return ResponseEntity.ok(map);
     }
 

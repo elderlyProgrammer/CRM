@@ -43,6 +43,10 @@ public class User extends BaseEntity {
                 .collect(Collectors.toSet());
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
 
 
 }

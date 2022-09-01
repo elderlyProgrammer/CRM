@@ -22,6 +22,7 @@ public class CaseDto {
     private Company company;
     private Person person;
     private User responsible;
+    private String number;
 
 
 }

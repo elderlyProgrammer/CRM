@@ -18,4 +18,7 @@ public class CompanyDto {
     private String address;
     private String phoneNumber;
     private Set<Map<String, String>> persons = new HashSet<>();
+    private Set<Map<String, String>> contracts = new HashSet<>();
+    private Set<Map<String, String>> cases = new HashSet<>();
+
 }

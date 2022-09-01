@@ -21,7 +21,21 @@ public class CompanyDtoFactory {
                     map.put("position", x.getPosition().getDescription());
                     companyDto.getPersons().add(map);
                 });
-
+        company.getContracts()
+                .forEach(x -> {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("id", x.getId().toString());
+                    map.put("description", x.getDescription());
+                    companyDto.getContracts().add(map);
+                });
+        company.getCases()
+                .forEach(x -> {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("id", x.getId().toString());
+                    map.put("number", x.getNumber());
+                    map.put("description", x.getDescription());
+                    companyDto.getCases().add(map);
+                });
         return companyDto;
     }
 }

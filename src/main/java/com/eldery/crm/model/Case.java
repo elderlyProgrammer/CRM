@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 
@@ -21,16 +20,18 @@ public class Case extends BaseEntity{
     private Date startDate;
     @Column(name = "end_date")
     private Date endDate;
+    @Column(name = "number")
+    private String number;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "case_type_id", referencedColumnName = "id")
     private CaseType caseType;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 

@@ -3,8 +3,6 @@ package com.eldery.crm.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -17,4 +15,7 @@ public class PersonDto {
     private String lastName;
     private String phoneNumber;
     private Set<Map<String, String>> companies = new HashSet<>();
+    private Set<Map<String, String>> cases = new HashSet<>();
+    private Set<Map<String, String>> contracts = new HashSet<>();
+
 }

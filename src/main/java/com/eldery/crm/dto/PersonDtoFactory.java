@@ -18,6 +18,19 @@ public class PersonDtoFactory {
             map.put("position", x.getPosition().getDescription());
             personDto.getCompanies().add(map);
         });
+        person.getCases().forEach(x -> {
+            Map<String,String> map = new HashMap<>();
+            map.put("id", x.getId().toString());
+            map.put("description", x.getDescription());
+            personDto.getCases().add(map);
+        });
+        person.getContracts().forEach(x -> {
+            Map<String,String> map = new HashMap<>();
+            map.put("id",x.getId().toString());
+            map.put("number", x.getNumber());
+            map.put("description", x.getDescription());
+            personDto.getContracts().add(map);
+        });
         return personDto;
     }
 }

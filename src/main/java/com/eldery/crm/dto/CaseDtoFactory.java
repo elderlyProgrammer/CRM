@@ -13,6 +13,7 @@ public class CaseDtoFactory {
         caseDto.setCaseType(icase.getCaseType());
         caseDto.setPerson(icase.getPerson());
         caseDto.setResponsible(icase.getResponsible());
+        caseDto.setNumber(icase.getNumber());
         return caseDto;
     }
 }
