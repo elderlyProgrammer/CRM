@@ -14,6 +14,7 @@ public class PersonDto {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String email;
     private Set<Map<String, String>> companies = new HashSet<>();
     private Set<Map<String, String>> cases = new HashSet<>();
     private Set<Map<String, String>> contracts = new HashSet<>();

@@ -20,6 +20,8 @@ public class Person extends BaseEntity {
     private String lastName;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "email")
+    private String email;
     @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<PersonCompanyPositionLink> companies;
 

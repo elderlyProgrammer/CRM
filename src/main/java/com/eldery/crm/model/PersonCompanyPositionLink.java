@@ -15,15 +15,15 @@ import javax.persistence.*;
 @Getter
 public class PersonCompanyPositionLink extends BaseEntity {
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;
 

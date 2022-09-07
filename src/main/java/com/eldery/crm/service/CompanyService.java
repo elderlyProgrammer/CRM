@@ -44,6 +44,7 @@ public class CompanyService {
                 .findFirst().orElse(null);
         company.getPersons().remove(link);
         personCompanyPositionLinkService.removeById(link.getId());
+
         return true;
     }
 

@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashSet;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -51,6 +53,10 @@ class CompanyServiceTest {
         company.getPersons().add(link);
 
         companyService.save(company);
+        Company testCompany = companyService.findCompanyById(company.getId());
+//        testCompany.setPersons(new HashSet<>());
+//        companyService.save(testCompany);
+
 
         try {
             companyService.removePersonFromCompany(company.getId(), person.getId());
@@ -58,8 +64,8 @@ class CompanyServiceTest {
             e.printStackTrace();
         }
 
-        System.out.println(link.getPerson().toString());
-        //personCompanyPositionLinkService.removeById(86L);
+        System.out.println(link.toString());
+        //personCompanyPositionLinkService.removeById(170L);
 
     }
 }
