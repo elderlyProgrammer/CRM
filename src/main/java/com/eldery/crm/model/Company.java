@@ -1,12 +1,14 @@
 package com.eldery.crm.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@Data
 public class Company extends BaseEntity{
     @Column(name = "name")
     private String name;
@@ -31,14 +34,14 @@ public class Company extends BaseEntity{
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<PersonCompanyPositionLink> persons;
+    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private Set<PersonCompanyPositionLink> persons = new HashSet<>();
 
     @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<Contract> contracts;
+    private Set<Contract> contracts = new HashSet<>();
 
     @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<Case> cases;
+    private Set<Case> cases = new HashSet<>();
 
 
     @JsonIgnore

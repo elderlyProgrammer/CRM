@@ -32,8 +32,8 @@ public class SecurityConfig {
                                 .antMatchers("/api/auth/login", "/api/auth/token").permitAll()
                                 .anyRequest().authenticated()
                                 .and()
+                                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                                .addFilterAfter(corsFilter, JwtFilter.class)
                 ).build();
     }
 

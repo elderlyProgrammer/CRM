@@ -1,7 +1,9 @@
 package com.eldery.crm.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "person_company_position")
 @NoArgsConstructor
-
+@Setter
+@Getter
 public class PersonCompanyPositionLink extends BaseEntity {
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
