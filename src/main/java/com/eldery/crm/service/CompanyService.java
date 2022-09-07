@@ -42,7 +42,6 @@ public class CompanyService {
         PersonCompanyPositionLink link = company.getPersons().stream()
                 .filter( x -> x.getPerson().getId().equals(personId))
                 .findFirst().orElse(null);
-        company.getPersons().remove(link);
         personCompanyPositionLinkService.removeById(link.getId());
         return true;
     }

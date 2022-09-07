@@ -30,4 +30,8 @@ public class PositionService {
 
 
     }
+
+    public PositionRepository getRepository() {
+        return positionRepository;
+    }
 }

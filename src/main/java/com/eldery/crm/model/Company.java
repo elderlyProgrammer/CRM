@@ -34,13 +34,13 @@ public class Company extends BaseEntity{
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
     private Set<PersonCompanyPositionLink> persons = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private Set<Contract> contracts = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private Set<Case> cases = new HashSet<>();
 
 

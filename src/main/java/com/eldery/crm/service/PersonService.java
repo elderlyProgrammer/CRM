@@ -20,4 +20,8 @@ public class PersonService {
     public Page<Person> getPage(int page, int count) {
         return personRepository.findAll(PageRequest.of(page, count));
     }
+
+    public PersonRepository getRepository() {
+        return personRepository;
+    }
 }
