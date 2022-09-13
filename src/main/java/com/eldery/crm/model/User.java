@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,6 +39,18 @@ public class User extends BaseEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_cases",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "case_id", referencedColumnName = "id")})
+    private List<Case> cases;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_contracts",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "contract_id", referencedColumnName = "id")})
+    private List<Contract> contracts;
 
     public Set<String> getRoles() {
         return roles.stream()

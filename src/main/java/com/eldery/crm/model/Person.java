@@ -1,11 +1,11 @@
 package com.eldery.crm.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,6 +13,8 @@ import java.util.Set;
 @Table(name = "persons")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Person extends BaseEntity {
     @Column(name = "first_name")
     private String firstName;
@@ -22,14 +24,29 @@ public class Person extends BaseEntity {
     private String phoneNumber;
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<PersonCompanyPositionLink> companies;
 
-    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<Contract> contracts;
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    private Set<PersonCompanyPositionLink> companies = new HashSet<>();
 
-    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<Case> cases;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "persons_contracts",
+            joinColumns = {@JoinColumn(name = "person_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "contract_id", referencedColumnName = "id")})
+    private Set<Contract> contracts = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "persons_cases",
+            joinColumns = {@JoinColumn(name = "person_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "case_id", referencedColumnName = "id")})
+    private Set<Case> cases = new HashSet<>();
+
+    public Person() {
+
+    }
+
+    public static PersonBuilder builder() {
+        return new PersonBuilder();
+    }
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -38,9 +55,11 @@ public class Person extends BaseEntity {
     @JsonIgnore
     public Map<String, String> getSimple() {
         Map<String, String> map = new HashMap<>();
-        map.put("id",this.getId().toString());
+        map.put("id", this.getId().toString());
         map.put("name", getFullName());
         return map;
     }
 
-}
+
+    }
+

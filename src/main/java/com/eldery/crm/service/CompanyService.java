@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
@@ -28,7 +31,7 @@ public class CompanyService {
         return companyRepository.findAll(PageRequest.of(page, count));
     }
 
-    public void save(CompanyDto companyDto) {
+    public void saveFromDto(CompanyDto companyDto) {
         companyRepository.saveAndFlush(CompanyFactory.createCompanyFromDto(companyDto));
     }
 
@@ -42,10 +45,15 @@ public class CompanyService {
         PersonCompanyPositionLink link = company.getPersons().stream()
                 .filter( x -> x.getPerson().getId().equals(personId))
                 .findFirst().orElse(null);
-        company.getPersons().remove(link);
+
         personCompanyPositionLinkService.removeById(link.getId());
 
+
         return true;
+    }
+
+    public Map<String, String> search(String param) {
+      return null;
     }
 
 

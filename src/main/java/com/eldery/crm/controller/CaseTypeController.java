@@ -4,6 +4,7 @@ import com.eldery.crm.model.CaseType;
 import com.eldery.crm.service.CaseTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,9 @@ import java.util.Map;
 public class CaseTypeController {
     private final CaseTypeService caseTypeService;
 
+    @GetMapping("")
     public ResponseEntity<List<Map<String, String>>> getCaseTypes() {
-        List<Map<String, String>> caseTypes = new ArrayList<>();
+        List<Map<String, String>> caseTypes;
         caseTypes = caseTypeService.findAll().stream()
                 .map(CaseType::getSimple)
                 .toList();

@@ -1,5 +1,6 @@
 package com.eldery.crm.service;
 
+import com.eldery.crm.dto.PersonDto;
 import com.eldery.crm.model.Person;
 import com.eldery.crm.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,23 @@ public class PersonService {
 
     public Page<Person> getPage(int page, int count) {
         return personRepository.findAll(PageRequest.of(page, count));
+    }
+
+    public void save(Person person) {
+        personRepository.save(person);
+    }
+
+    public long count() {
+        return personRepository.count();
+    }
+
+    public void saveFromDto(PersonDto personDto) {
+        Person person = Person.builder()
+                .firstName(personDto.getFirstName())
+                .lastName(personDto.getLastName())
+                .email(personDto.getEmail())
+                .phoneNumber(personDto.getPhoneNumber())
+                .build();
+        save(person);
     }
 }

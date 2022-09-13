@@ -21,7 +21,7 @@ public class CaseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CaseDto> getCaseById(@PathVariable(name = "id") Long id) {
-        CaseDto caseDto = CaseDtoFactory.createDtoFromCase(caseService.findCaseById(id));
+        CaseDto caseDto = CaseDtoFactory.createDto(caseService.findCaseById(id));
         return ResponseEntity.ok(caseDto);
     }
 
@@ -37,11 +37,15 @@ public class CaseController {
         return getPageResponseEntity(page - 1, count);
     }
 
+    public void addCase (CaseDto caseDto) {
+
+    }
+
     private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {
         Page<Case> pages = caseService.getPage(page, count);
         Map<String, Object> map = new HashMap<>();
         map.put("count", pages.getTotalPages());
-        map.put("page", pages.stream().map(CaseDtoFactory::createDtoFromCase).toList());
+        map.put("page", pages.stream().map(Case::getSimple).toList());
         return ResponseEntity.ok(map);
     }
 

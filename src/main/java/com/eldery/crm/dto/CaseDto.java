@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -18,9 +19,9 @@ public class CaseDto {
     private Date endDate;
     private String number;
     private Map<String, String> caseType = new HashMap<>();
-    private Map<String, String> company = new HashMap<>();
-    private Map<String, String> person = new HashMap<>();
-    private Map<String, String> responsible = new HashMap<>();
+    private List<Map<String, String>> companies;
+    private List<Map<String, String>> persons;
+    private List<Map<String, String>> responsible;
 
 
 

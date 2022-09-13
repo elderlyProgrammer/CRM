@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -27,26 +30,24 @@ public class Contract extends BaseEntity {
     @Column(name = "number")
     private String number;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    private Company company;
+    @ManyToMany(mappedBy = "contracts", fetch = FetchType.EAGER)
+    private List<Company> companies;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person person;
+    @ManyToMany(mappedBy = "contracts",fetch = FetchType.EAGER)
+    private List<Person> persons;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User responsible;
+    @ManyToMany(mappedBy = "contracts", fetch = FetchType.EAGER)
+    private List<User> responsible;
 
 
     @JsonIgnore
     public Map<String, String> getSimple() {
-        //DateTimeFormatter formatter = new DateTimeFormatter("dd:mm:yyyy");
+        LocalDateTime localDateTime = getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Map<String, String> map = new HashMap<>();
         map.put("id", getId().toString());
         map.put("description", getDescription());
-        map.put("date", String.valueOf(getDate()));
+        map.put("date", formatter.format(localDateTime));
         map.put("number", getNumber());
         return map;
     }

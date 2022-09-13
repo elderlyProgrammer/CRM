@@ -15,8 +15,8 @@ public class ContractDto {
     private Long amount;
     private String number;
 
-    private Set<Map<String, String>> company = new HashSet<>();
-    private Set<Map<String, String>> person = new HashSet<>();
+    private Set<Map<String, String>> companies = new HashSet<>();
+    private Set<Map<String, String>> persons = new HashSet<>();
     private Set<Map<String, String>> responsible = new HashSet<>();
 
 }

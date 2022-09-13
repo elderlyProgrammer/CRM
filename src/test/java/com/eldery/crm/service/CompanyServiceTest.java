@@ -9,6 +9,9 @@ import com.eldery.crm.model.Position;
 import com.eldery.crm.repository.CompanyRepository;
 import com.eldery.crm.repository.PersonCompanyPositionLinkRepository;
 import lombok.RequiredArgsConstructor;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +20,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashSet;
 
-
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @RequiredArgsConstructor
@@ -32,10 +34,15 @@ class CompanyServiceTest {
     CompanyService companyService;
     @Autowired
     PersonCompanyPositionLinkService personCompanyPositionLinkService;
+    @Autowired
+    PersonService personService;
+    @Autowired
+    PositionService positionService;
 
+    @Ignore
     @Test
     void removePersonFromCompany() {
-
+        long personCompanyPositionLink = personCompanyPositionLinkRepository.count();
 
         Company company = new Company();
         Person person = new Person();
@@ -52,11 +59,11 @@ class CompanyServiceTest {
         link.setPerson(person);
         company.getPersons().add(link);
 
+        positionService.save(position);
+        personService.save(person);
         companyService.save(company);
-        Company testCompany = companyService.findCompanyById(company.getId());
-//        testCompany.setPersons(new HashSet<>());
-//        companyService.save(testCompany);
-
+        personCompanyPositionLinkRepository.save(link);
+        Assertions.assertEquals(personCompanyPositionLink + 1L, personCompanyPositionLinkRepository.count());
 
         try {
             companyService.removePersonFromCompany(company.getId(), person.getId());
@@ -64,8 +71,8 @@ class CompanyServiceTest {
             e.printStackTrace();
         }
 
-        System.out.println(link.toString());
-        //personCompanyPositionLinkService.removeById(170L);
+        Assertions.assertEquals(personCompanyPositionLink, personCompanyPositionLinkRepository.count());
+
 
     }
 }

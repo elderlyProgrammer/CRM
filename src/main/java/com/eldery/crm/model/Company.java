@@ -37,10 +37,16 @@ public class Company extends BaseEntity{
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
     private Set<PersonCompanyPositionLink> persons = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "companies_contracts",
+            joinColumns = {@JoinColumn(name = "compani_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "contract_id", referencedColumnName = "id")})
     private Set<Contract> contracts = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "companies_cases",
+            joinColumns = {@JoinColumn(name = "company_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "case_id", referencedColumnName = "id")})
     private Set<Case> cases = new HashSet<>();
 
 

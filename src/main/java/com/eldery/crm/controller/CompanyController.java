@@ -41,9 +41,15 @@ public class CompanyController {
     }
 
     @PostMapping("/add")
-    public void addCompany(@RequestBody CompanyDto company) {
-        companyService.save(company);
+    public void addCompany(@RequestBody CompanyDto companyDto) {
+        companyService.saveFromDto(companyDto);
     }
+
+    @GetMapping("/find/{param}")
+    public ResponseEntity findCompanyByParams (@PathVariable(name = "param") String param) {
+        return null;
+    }
+
 
     private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {
         Page<Company> companies = companyService.getPage(page - 1, count);

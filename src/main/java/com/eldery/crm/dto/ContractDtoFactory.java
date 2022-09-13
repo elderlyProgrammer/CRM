@@ -1,6 +1,11 @@
 package com.eldery.crm.dto;
 
+import com.eldery.crm.model.Company;
 import com.eldery.crm.model.Contract;
+import com.eldery.crm.model.Person;
+import com.eldery.crm.model.User;
+
+import java.util.stream.Collectors;
 
 public class ContractDtoFactory {
 
@@ -10,14 +15,22 @@ public class ContractDtoFactory {
         contractDto.setAmount(contract.getAmount());
         contractDto.setDate(contract.getDate());
         contractDto.setNumber(contract.getNumber());
-        if (contract.getCompany() != null) {
-            contractDto.getCompany().add(contract.getCompany().getSimple());
+        if (contract.getCompanies() != null) {
+            contractDto.setCompanies(contract.getCompanies().stream()
+            .map(Company::getSimple)
+            .collect(Collectors.toSet()));
         }
 
-        if (contract.getPerson() != null) {
-            contractDto.getPerson().add(contract.getPerson().getSimple());
+        if (contract.getPersons() != null) {
+            contractDto.setPersons(contract.getPersons().stream()
+            .map(Person::getSimple)
+            .collect(Collectors.toSet()));
         }
-        contractDto.getResponsible().add(contract.getResponsible().getSimple());
+        if (contract.getResponsible() != null) {
+            contractDto.setResponsible(contract.getResponsible().stream()
+            .map(User::getSimple)
+            .collect(Collectors.toSet()));
+        }
         return contractDto;
     }
 }

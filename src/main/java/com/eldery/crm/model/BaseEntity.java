@@ -1,8 +1,10 @@
 package com.eldery.crm.model;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,15 +13,15 @@ import java.util.Date;
 @Data
 public class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "created_date")
     private Date createdDate;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "updated_date")
     private Date updatedDate;
 

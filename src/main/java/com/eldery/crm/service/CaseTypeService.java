@@ -15,4 +15,8 @@ public class CaseTypeService {
     public List<CaseType> findAll() {
         return caseTypeRepository.findAll();
     }
+
+    public CaseType findById(Long id) {
+        return caseTypeRepository.findById(id).orElse(null);
+    }
 }

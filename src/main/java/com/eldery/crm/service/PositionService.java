@@ -30,4 +30,8 @@ public class PositionService {
 
 
     }
+
+    public void save(Position position) {
+        positionRepository.save(position);
+    }
 }

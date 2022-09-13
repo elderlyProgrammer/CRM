@@ -19,8 +19,12 @@ public class UserService {
         return userRepository.getByLogin(login);
     }
 
-    public void saveUser (User user) {
+    public void save (User user) {
         userRepository.save(user);
+    }
+
+    public User findUserById (Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
 }
