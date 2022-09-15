@@ -26,7 +26,7 @@ public class AuthService {
     private final JwtProvider jwtProvider;
 
     public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException{
-        final User user = userService.getByLogin(authRequest.getLogin());
+        final User user = userService.findByLogin(authRequest.getLogin());
         if (user == null) {
             String info = "User: " + authRequest.getLogin() + " not found";
             throw new AuthException(info);
@@ -48,7 +48,7 @@ public class AuthService {
             final String login = claims.getSubject();
             final String saveRefreshToken = refreshStorage.get(login);
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
-                final User user = userService.getByLogin(login);
+                final User user = userService.findByLogin(login);
                 if (user == null) {
                     throw new AuthException("User: " + login + " not found");
                 }
@@ -65,7 +65,7 @@ public class AuthService {
             final String login = claims.getSubject();
             final String saveRefreshToken = refreshStorage.get(login);
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
-                final User user = userService.getByLogin(login);
+                final User user = userService.findByLogin(login);
                 if (user == null) {
                     throw new AuthException("User: " + login + " not found");
                 }

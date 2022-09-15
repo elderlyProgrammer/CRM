@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CaseTypeDto {
+public class CaseTypeDTO {
     private String description;
 }

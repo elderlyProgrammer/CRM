@@ -1,7 +1,7 @@
 package com.eldery.crm.controller;
 
-import com.eldery.crm.dto.CompanyDto;
-import com.eldery.crm.dto.CompanyDtoFactory;
+import com.eldery.crm.dto.CompanyDTO;
+import com.eldery.crm.dto.CompanyDTOFactory;
 import com.eldery.crm.model.Company;
 import com.eldery.crm.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -21,9 +23,9 @@ public class CompanyController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyDto> findCompanyById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<CompanyDTO> findCompanyById(@PathVariable(name = "id") Long id) {
         Company company = companyService.findCompanyById(id);
-        CompanyDto dto = CompanyDtoFactory.createDtoFromCompany(company);
+        CompanyDTO dto = CompanyDTOFactory.createDtoFromCompany(company);
         return ResponseEntity.ok(dto);
     }
 
@@ -41,13 +43,21 @@ public class CompanyController {
     }
 
     @PostMapping("/add")
-    public void addCompany(@RequestBody CompanyDto companyDto) {
+    public void addCompany(@RequestBody CompanyDTO companyDto) {
         companyService.saveFromDto(companyDto);
     }
 
     @GetMapping("/find/{param}")
-    public ResponseEntity findCompanyByParams (@PathVariable(name = "param") String param) {
-        return null;
+    public ResponseEntity<List<Map<String, String>>> findCompanyByParams (@PathVariable(name = "param") String param) {
+        List<Map<String, String>> list = new LinkedList<>();
+        companyService.search(param)
+                .forEach(x -> {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("id", x.getId().toString());
+                    map.put("name", x.getName());
+                    list.add(map);
+                });
+        return ResponseEntity.ok(list);
     }
 
 

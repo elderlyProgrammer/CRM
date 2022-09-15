@@ -2,9 +2,9 @@ package com.eldery.crm.dto;
 
 import com.eldery.crm.model.CaseType;
 
-public class CaseTypeDtoFactory {
-    public static CaseTypeDto  createDtoFromCaseType (CaseType caseType) {
-        CaseTypeDto caseTypeDto = new CaseTypeDto();
+public class CaseTypeDTOFactory {
+    public static CaseTypeDTO createDtoFromCaseType (CaseType caseType) {
+        CaseTypeDTO caseTypeDto = new CaseTypeDTO();
         caseTypeDto.setDescription(caseType.getDescription());
         return caseTypeDto;
     }

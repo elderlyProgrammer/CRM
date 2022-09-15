@@ -8,9 +8,9 @@ import com.eldery.crm.model.User;
 import java.util.stream.Collectors;
 
 
-public class CaseDtoFactory {
-    public static CaseDto createDto(Case icase) {
-        CaseDto caseDto = new CaseDto();
+public class CaseDTOFactory {
+    public static CaseDTO createDto(Case icase) {
+        CaseDTO caseDto = new CaseDTO();
         caseDto.setDescription(icase.getDescription());
         caseDto.setStartDate(icase.getStartDate());
         caseDto.setEndDate(icase.getEndDate());
@@ -34,5 +34,14 @@ public class CaseDtoFactory {
 
         return caseDto;
     }
+
+//    public static Case createCase(CaseRDTO caseRDTO) {
+//        return Case.builder()
+//                .description(caseRDTO.getDescription())
+//                .number(caseRDTO.getNumber())
+//                .startDate(caseRDTO.getStartDate())
+//                .endDate(caseRDTO.getEndDate())
+//                .build();
+//    }
 
 }

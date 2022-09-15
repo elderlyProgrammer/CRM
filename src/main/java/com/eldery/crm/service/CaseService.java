@@ -7,8 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -29,7 +34,7 @@ public class CaseService {
         return caseRepository.findAll(PageRequest.of(page, count));
     }
 
-    public void addPersonToCase (Long caseId, Long personId) {
+    public void addPersonToCase(Long caseId, Long personId) {
         Case icase = findCaseById(caseId);
         Person person = personService.findPersonById(personId);
         icase.getPersons().add(person);
@@ -56,23 +61,47 @@ public class CaseService {
         userService.save(responsible);
     }
 
-    public void createCase (CaseRDTO caseRDTO) {
-        Case newCase;
+    public void createCase(CaseRDTO caseRDTO) {
+
         CaseType caseType = caseTypeService.findById(caseRDTO.getCaseType());
-        newCase = Case.builder()
+        List<Person> persons = caseRDTO.getPersons().stream()
+                .map(personService::findPersonById)
+                .toList();
+        List<Company> companies = caseRDTO.getCompanies().stream()
+                .map(companyService::findCompanyById)
+                .toList();
+        List<User> responsibles = caseRDTO.getResponsible().stream()
+                .map(userService::findUserById)
+                .collect(Collectors.toList());
+
+        Case newCase = Case.builder()
                 .number(caseRDTO.getNumber())
                 .description(caseRDTO.getDescription())
                 .startDate(caseRDTO.getStartDate())
                 .endDate(caseRDTO.getEndDate())
                 .caseType(caseType)
-//                .persons(new ArrayList<>())
-//                .companies(new ArrayList<>())
-//                .responsible(new ArrayList<>())
+                .persons(new HashSet<>(persons))
+                .companies(new HashSet<>(companies))
+                .responsible(new HashSet<>(responsibles))
                 .build();
         save(newCase);
+
+        persons.forEach(person -> {
+            person.getCases().add(newCase);
+            personService.save(person);
+        });
+        companies.forEach(company -> {
+            company.getCases().add(newCase);
+            companyService.save(company);
+        });
+        responsibles.forEach(responsible -> {
+            responsible.getCases().add(newCase);
+            userService.save(responsible);
+        });
+
     }
 
-    public long count () {
+    public long count() {
         return caseRepository.count();
     }
 

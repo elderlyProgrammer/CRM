@@ -10,10 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Table(name = "contracts")
@@ -31,13 +28,13 @@ public class Contract extends BaseEntity {
     private String number;
 
     @ManyToMany(mappedBy = "contracts", fetch = FetchType.EAGER)
-    private List<Company> companies;
+    private Set<Company> companies;
 
     @ManyToMany(mappedBy = "contracts",fetch = FetchType.EAGER)
-    private List<Person> persons;
+    private Set<Person> persons;
 
     @ManyToMany(mappedBy = "contracts", fetch = FetchType.EAGER)
-    private List<User> responsible;
+    private Set<User> responsible;
 
 
     @JsonIgnore

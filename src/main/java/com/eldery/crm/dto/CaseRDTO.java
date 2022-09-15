@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.*;
 
 @Getter
 @Setter
@@ -16,4 +16,7 @@ public class CaseRDTO {
     private Date endDate;
     private String number;
     private Long caseType;
+    private Set<Long> companies = new HashSet<>();
+    private Set<Long> persons = new HashSet<>();
+    private Set<Long> responsible = new HashSet<>();
 }

@@ -1,13 +1,12 @@
 package com.eldery.crm.model;
 
 
-import com.eldery.crm.dto.CompanyDto;
+import com.eldery.crm.dto.CompanyDTO;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class CompanyFactory {
-    public static Company createCompanyFromDto(CompanyDto companyDto) {
+    public static Company createCompanyFromDto(CompanyDTO companyDto) {
         Company company = new Company();
         company.setName(companyDto.getName());
         company.setAddress(companyDto.getAddress());

@@ -1,6 +1,7 @@
 package com.eldery.crm.service;
 
-import com.eldery.crm.dto.CompanyDto;
+import com.eldery.crm.dto.CompanyDTO;
+import com.eldery.crm.dto.CompanyRDTO;
 import com.eldery.crm.exception.PersonNotFoundException;
 import com.eldery.crm.model.Company;
 import com.eldery.crm.model.CompanyFactory;
@@ -10,15 +11,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
     private final CompanyRepository companyRepository;
     private final PersonCompanyPositionLinkService personCompanyPositionLinkService;
+//    @PersistenceContext EntityManager entityManager;
+//    private final HibernateSearchService hibernateSearchService;
 
 
     public Company findCompanyById(Long id) {
@@ -31,7 +34,7 @@ public class CompanyService {
         return companyRepository.findAll(PageRequest.of(page, count));
     }
 
-    public void saveFromDto(CompanyDto companyDto) {
+    public void saveFromDto(CompanyDTO companyDto) {
         companyRepository.saveAndFlush(CompanyFactory.createCompanyFromDto(companyDto));
     }
 
@@ -52,9 +55,12 @@ public class CompanyService {
         return true;
     }
 
-    public Map<String, String> search(String param) {
-      return null;
+    @Transactional
+    public List<Company> search(String param) {
+            return companyRepository.findByNameContainingOrNameContainsIgnoreCase(param, param);
     }
 
+    public void createCompany (CompanyRDTO companyRDTO) {
 
+    }
 }

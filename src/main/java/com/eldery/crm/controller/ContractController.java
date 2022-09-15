@@ -1,8 +1,7 @@
 package com.eldery.crm.controller;
 
-import com.eldery.crm.dto.ContractDto;
-import com.eldery.crm.dto.ContractDtoFactory;
-import com.eldery.crm.model.Company;
+import com.eldery.crm.dto.ContractDTO;
+import com.eldery.crm.dto.ContractDTOFactory;
 import com.eldery.crm.model.Contract;
 import com.eldery.crm.service.ContractService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +22,9 @@ public class ContractController {
     private final ContractService contractService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContractDto> getContractById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<ContractDTO> getContractById(@PathVariable(name = "id") Long id) {
         Contract contract = contractService.findContractById(id);
-        return ResponseEntity.ok(ContractDtoFactory.createDtoFromContract(contract));
+        return ResponseEntity.ok(ContractDTOFactory.createDtoFromContract(contract));
     }
 
     @GetMapping("/{page}/{count}")

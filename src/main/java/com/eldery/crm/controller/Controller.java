@@ -1,7 +1,6 @@
 package com.eldery.crm.controller;
 
 import com.eldery.crm.jwt.JwtAuthentication;
-import com.eldery.crm.model.Company;
 import com.eldery.crm.model.User;
 import com.eldery.crm.service.AuthService;
 import com.eldery.crm.service.UserService;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 
 @RestController
@@ -41,7 +38,7 @@ public class Controller {
 
     @GetMapping("profile/{name}")
     public ResponseEntity<User> getUserProfile(@PathVariable(name = "name") String userName) {
-        User user = userService.getByLogin(userName);
+        User user = userService.findByLogin(userName);
         return ResponseEntity.ok(user);
     }
 

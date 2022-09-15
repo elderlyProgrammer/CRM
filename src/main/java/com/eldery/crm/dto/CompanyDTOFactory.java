@@ -5,9 +5,9 @@ import com.eldery.crm.model.Company;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CompanyDtoFactory {
-    public static CompanyDto createDtoFromCompany(Company company) {
-        CompanyDto companyDto = new CompanyDto();
+public class CompanyDTOFactory {
+    public static CompanyDTO createDtoFromCompany(Company company) {
+        CompanyDTO companyDto = new CompanyDTO();
         companyDto.setName(company.getName());
         companyDto.setAddress(company.getAddress());
         companyDto.setInn(company.getInn());

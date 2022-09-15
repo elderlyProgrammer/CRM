@@ -1,10 +1,12 @@
 package com.eldery.crm.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
+
 
 import javax.persistence.*;
 import java.util.HashMap;
@@ -13,12 +15,16 @@ import java.util.Map;
 import java.util.Set;
 
 @Entity
+@Indexed
 @Table(name = "companies")
 @Getter
 @Setter
 @NoArgsConstructor
-@Data
+@Builder
+@AllArgsConstructor
 public class Company extends BaseEntity{
+
+    @Field
     @Column(name = "name")
     private String name;
 

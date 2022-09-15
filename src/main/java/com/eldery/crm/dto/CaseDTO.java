@@ -12,7 +12,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 
-public class CaseDto {
+public class CaseDTO {
 
     private String description;
     private Date startDate;

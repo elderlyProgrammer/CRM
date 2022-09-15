@@ -3,10 +3,7 @@ package com.eldery.crm.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Entity
@@ -31,13 +28,13 @@ public class Case extends BaseEntity{
     private CaseType caseType;
 
     @ManyToMany(mappedBy = "cases",fetch = FetchType.EAGER)
-    private List<Company> companies;
+    private Set<Company> companies;
 
     @ManyToMany(mappedBy = "cases", fetch = FetchType.EAGER)
-    private List<Person> persons;
+    private Set<Person> persons;
 
     @ManyToMany(mappedBy = "cases", fetch = FetchType.EAGER)
-    private List<User> responsible;
+    private Set<User> responsible;
 
     public Map<String, String> getSimple() {
         Map<String, String> map = new HashMap<>();

@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Table(name = "users")
 public class User extends BaseEntity {
     @Column(name = "login")
@@ -44,13 +45,13 @@ public class User extends BaseEntity {
     @JoinTable(name = "users_cases",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "case_id", referencedColumnName = "id")})
-    private List<Case> cases;
+    private Set<Case> cases;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_contracts",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "contract_id", referencedColumnName = "id")})
-    private List<Contract> contracts;
+    private Set<Contract> contracts;
 
     public Set<String> getRoles() {
         return roles.stream()

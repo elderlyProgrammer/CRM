@@ -1,7 +1,7 @@
 package com.eldery.crm.controller;
 
-import com.eldery.crm.dto.CaseDto;
-import com.eldery.crm.dto.CaseDtoFactory;
+import com.eldery.crm.dto.CaseDTO;
+import com.eldery.crm.dto.CaseDTOFactory;
 import com.eldery.crm.model.Case;
 import com.eldery.crm.service.CaseService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ public class CaseController {
     private final CaseService caseService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<CaseDto> getCaseById(@PathVariable(name = "id") Long id) {
-        CaseDto caseDto = CaseDtoFactory.createDto(caseService.findCaseById(id));
+    public ResponseEntity<CaseDTO> getCaseById(@PathVariable(name = "id") Long id) {
+        CaseDTO caseDto = CaseDTOFactory.createDto(caseService.findCaseById(id));
         return ResponseEntity.ok(caseDto);
     }
 
@@ -37,7 +37,7 @@ public class CaseController {
         return getPageResponseEntity(page - 1, count);
     }
 
-    public void addCase (CaseDto caseDto) {
+    public void addCase (CaseDTO caseDto) {
 
     }
 

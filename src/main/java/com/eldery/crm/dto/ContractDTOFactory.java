@@ -7,10 +7,10 @@ import com.eldery.crm.model.User;
 
 import java.util.stream.Collectors;
 
-public class ContractDtoFactory {
+public class ContractDTOFactory {
 
-    public static ContractDto createDtoFromContract(Contract contract) {
-        ContractDto contractDto = new ContractDto();
+    public static ContractDTO createDtoFromContract(Contract contract) {
+        ContractDTO contractDto = new ContractDTO();
         contractDto.setDescription(contract.getDescription());
         contractDto.setAmount(contract.getAmount());
         contractDto.setDate(contract.getDate());

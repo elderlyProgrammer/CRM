@@ -8,7 +8,7 @@ import java.util.*;
 
 @Getter
 @Setter
-public class ContractDto {
+public class ContractDTO {
 
     private String description;
     private Date date;

@@ -9,7 +9,6 @@ import com.eldery.crm.model.Position;
 import com.eldery.crm.repository.CompanyRepository;
 import com.eldery.crm.repository.PersonCompanyPositionLinkRepository;
 import lombok.RequiredArgsConstructor;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
+
 
 
 @Ignore
@@ -74,5 +74,10 @@ class CompanyServiceTest {
         Assertions.assertEquals(personCompanyPositionLink, personCompanyPositionLinkRepository.count());
 
 
+    }
+
+    @Test
+    void search() {
+        Assertions.assertEquals( 3, companyService.search("лег").size());
     }
 }
