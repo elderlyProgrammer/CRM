@@ -8,6 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class PersonService {
@@ -26,6 +30,11 @@ public class PersonService {
         personRepository.save(person);
     }
 
+    public void save(Set<Person> persons) {
+        persons.forEach(this::save);
+    }
+
+
     public long count() {
         return personRepository.count();
     }
@@ -38,5 +47,9 @@ public class PersonService {
                 .phoneNumber(personDto.getPhoneNumber())
                 .build();
         save(person);
+    }
+
+    public Set<Person> findAllPersons (Set<Long> ids) {
+        return new HashSet<>(personRepository.findAllById(ids));
     }
 }

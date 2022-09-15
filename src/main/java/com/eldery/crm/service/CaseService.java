@@ -64,15 +64,9 @@ public class CaseService {
     public void createCase(CaseRDTO caseRDTO) {
 
         CaseType caseType = caseTypeService.findById(caseRDTO.getCaseType());
-        List<Person> persons = caseRDTO.getPersons().stream()
-                .map(personService::findPersonById)
-                .toList();
-        List<Company> companies = caseRDTO.getCompanies().stream()
-                .map(companyService::findCompanyById)
-                .toList();
-        List<User> responsibles = caseRDTO.getResponsible().stream()
-                .map(userService::findUserById)
-                .collect(Collectors.toList());
+        Set<Person> persons = personService.findAllPersons(caseRDTO.getPersons());
+        Set<Company> companies = companyService.findAllCompanies(caseRDTO.getCompanies());
+        Set<User> responsibles = userService.findAllResponsibles(caseRDTO.getResponsible());
 
         Case newCase = Case.builder()
                 .number(caseRDTO.getNumber())
@@ -86,18 +80,9 @@ public class CaseService {
                 .build();
         save(newCase);
 
-        persons.forEach(person -> {
-            person.getCases().add(newCase);
-            personService.save(person);
-        });
-        companies.forEach(company -> {
-            company.getCases().add(newCase);
-            companyService.save(company);
-        });
-        responsibles.forEach(responsible -> {
-            responsible.getCases().add(newCase);
-            userService.save(responsible);
-        });
+        personService.save(persons);
+        companyService.save(companies);
+        userService.save(responsibles);
 
     }
 

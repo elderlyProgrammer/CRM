@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Setter
 @Getter
@@ -34,4 +36,6 @@ public class PositionService {
     public void save(Position position) {
         positionRepository.save(position);
     }
+
+
 }

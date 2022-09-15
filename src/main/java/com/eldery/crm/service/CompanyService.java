@@ -5,6 +5,7 @@ import com.eldery.crm.dto.CompanyRDTO;
 import com.eldery.crm.exception.PersonNotFoundException;
 import com.eldery.crm.model.Company;
 import com.eldery.crm.model.CompanyFactory;
+import com.eldery.crm.model.Person;
 import com.eldery.crm.model.PersonCompanyPositionLink;
 import com.eldery.crm.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +45,10 @@ public class CompanyService {
         companyRepository.saveAndFlush(company);
     }
 
+    public void save(Set<Company> company) {
+        company.forEach(this::save);
+    }
+
     public boolean removePersonFromCompany(Long companyId, Long personId) throws PersonNotFoundException {
 
         Company company = findCompanyById(companyId);
@@ -58,6 +65,10 @@ public class CompanyService {
     @Transactional
     public List<Company> search(String param) {
             return companyRepository.findByNameContainingOrNameContainsIgnoreCase(param, param);
+    }
+
+    public Set<Company> findAllCompanies (Set<Long> ids) {
+        return new HashSet<>(companyRepository.findAllById(ids));
     }
 
     public void createCompany (CompanyRDTO companyRDTO) {
