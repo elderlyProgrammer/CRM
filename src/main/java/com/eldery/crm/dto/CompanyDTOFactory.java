@@ -13,6 +13,7 @@ public class CompanyDTOFactory {
         companyDto.setInn(company.getInn());
         companyDto.setKpp(company.getKpp());
         companyDto.setPhoneNumber(company.getPhoneNumber());
+        companyDto.setId(company.getId());
         company.getPersons()
                 .forEach(x -> {
                     Map<String, String> map = new HashMap<>();

@@ -15,6 +15,7 @@ public class ContractDTOFactory {
         contractDto.setAmount(contract.getAmount());
         contractDto.setDate(contract.getDate());
         contractDto.setNumber(contract.getNumber());
+        contractDto.setId(contract.getId());
         if (contract.getCompanies() != null) {
             contractDto.setCompanies(contract.getCompanies().stream()
             .map(Company::getSimple)

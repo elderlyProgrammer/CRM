@@ -12,7 +12,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 
-public class CaseDTO {
+public class CaseDTO extends BaseDTO {
 
     private String description;
     private Date startDate;

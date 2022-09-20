@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -44,6 +46,14 @@ public class PersonController {
 
         personService.saveFromDto(personDto);
 
+    }
+
+    @PostMapping("/find")
+    public ResponseEntity<List<Map<String, String>>> findPersonByParams (@RequestBody Map<String, String> allParams) {
+        List<Map<String, String>> list = new LinkedList<>();
+        personService.search(allParams.get("person"))
+                .forEach(x -> list.add(x.getSimple()));
+        return ResponseEntity.ok(list);
     }
 
     private ResponseEntity<Map<String, Object>> getPageResponseEntity(int page, int count) {

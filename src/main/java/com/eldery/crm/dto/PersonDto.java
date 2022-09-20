@@ -10,7 +10,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-public class PersonDto {
+public class PersonDto extends BaseDTO {
     private String firstName;
     private String lastName;
     private String phoneNumber;

@@ -41,6 +41,27 @@ public class CaseController {
 
     }
 
+    @PostMapping("/addcompany")
+    public void addCompany(@RequestBody Map<String, String> allParams) {
+
+        caseService.addCompanyToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("company")));
+
+    }
+
+    @PostMapping("/addperson")
+    public void addPerson(@RequestBody Map<String, String> allParams) {
+
+        caseService.addPersonToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("person")));
+
+    }
+
+    @PostMapping("/addresponsible")
+    public void addResponsible(@RequestBody Map<String, String> allParams) {
+        caseService.addResponsibleToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("responsible")));
+    }
+
+
+
     private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {
         Page<Case> pages = caseService.getPage(page, count);
         Map<String, Object> map = new HashMap<>();
@@ -48,5 +69,6 @@ public class CaseController {
         map.put("page", pages.stream().map(Case::getSimple).toList());
         return ResponseEntity.ok(map);
     }
+
 
 }

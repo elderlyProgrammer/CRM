@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,17 +48,12 @@ public class CompanyController {
         companyService.saveFromDto(companyDto);
     }
 
-    @GetMapping("/find/{param}")
-    public ResponseEntity<List<Map<String, String>>> findCompanyByParams (@PathVariable(name = "param") String param) {
+    @PostMapping("/find")
+    public ResponseEntity<List<Map<String, String>>> findCompanyByParams (@RequestBody Map<String, String> allParams) {
         List<Map<String, String>> list = new LinkedList<>();
-        companyService.search(param)
-                .forEach(x -> {
-                    Map<String, String> map = new HashMap<>();
-                    map.put("id", x.getId().toString());
-                    map.put("name", x.getName());
-                    list.add(map);
-                });
-        return ResponseEntity.ok(list);
+        companyService.search(allParams.get("company"))
+                .forEach(x -> list.add(x.getSimple()));
+       return ResponseEntity.ok(list);
     }
 
 

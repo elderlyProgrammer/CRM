@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CompanyDTO {
+public class CompanyDTO extends BaseDTO {
     private String name;
     private Long inn;
     private Long kpp;

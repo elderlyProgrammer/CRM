@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CaseTypeDTO extends BaseDTO {
-    private String description;
+public abstract class BaseDTO {
+    private Long id;
 }

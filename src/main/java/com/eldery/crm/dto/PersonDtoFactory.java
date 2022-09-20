@@ -12,6 +12,7 @@ public class PersonDtoFactory {
         personDto.setLastName(person.getLastName());
         personDto.setPhoneNumber(person.getPhoneNumber());
         personDto.setEmail(person.getEmail());
+        personDto.setId(person.getId());
         person.getCompanies().forEach(x -> {
             Map<String,String> map = new HashMap<>();
             map.put("id", x.getCompany().getId().toString());

@@ -8,7 +8,7 @@ import java.util.*;
 
 @Getter
 @Setter
-public class ContractDTO {
+public class ContractDTO extends BaseDTO {
 
     private String description;
     private Date date;

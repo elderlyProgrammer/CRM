@@ -16,6 +16,7 @@ public class CaseDTOFactory {
         caseDto.setEndDate(icase.getEndDate());
         caseDto.setNumber(icase.getNumber());
         caseDto.setCaseType(icase.getCaseType().getSimple());
+        caseDto.setId(icase.getId());
         if (icase.getCompanies() != null) {
             caseDto.setCompanies(icase.getCompanies().stream()
                     .map(Company::getSimple)

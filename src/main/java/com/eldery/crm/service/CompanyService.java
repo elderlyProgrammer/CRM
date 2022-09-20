@@ -62,7 +62,6 @@ public class CompanyService {
         return true;
     }
 
-    @Transactional
     public List<Company> search(String param) {
             return companyRepository.findByNameContainingOrNameContainsIgnoreCase(param, param);
     }
