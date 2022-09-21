@@ -3,7 +3,7 @@ package com.eldery.crm.controller;
 import com.eldery.crm.dto.CaseDTO;
 import com.eldery.crm.dto.CaseDTOFactory;
 import com.eldery.crm.model.Case;
-import com.eldery.crm.service.CaseService;
+import com.eldery.crm.service.impl.CaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CaseController {
 
-    private final CaseService caseService;
+    private final CaseServiceImpl caseServiceImpl;
 
     @GetMapping("/{id}")
     public ResponseEntity<CaseDTO> getCaseById(@PathVariable(name = "id") Long id) {
-        CaseDTO caseDto = CaseDTOFactory.createDto(caseService.findCaseById(id));
+        CaseDTO caseDto = CaseDTOFactory.createDto(caseServiceImpl.findCaseById(id));
         return ResponseEntity.ok(caseDto);
     }
 
@@ -44,26 +44,26 @@ public class CaseController {
     @PostMapping("/addcompany")
     public void addCompany(@RequestBody Map<String, String> allParams) {
 
-        caseService.addCompanyToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("company")));
+        caseServiceImpl.addCompanyToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("company")));
 
     }
 
     @PostMapping("/addperson")
     public void addPerson(@RequestBody Map<String, String> allParams) {
 
-        caseService.addPersonToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("person")));
+        caseServiceImpl.addPersonToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("person")));
 
     }
 
     @PostMapping("/addresponsible")
     public void addResponsible(@RequestBody Map<String, String> allParams) {
-        caseService.addResponsibleToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("responsible")));
+        caseServiceImpl.addResponsibleToCase(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("responsible")));
     }
 
 
 
     private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {
-        Page<Case> pages = caseService.getPage(page, count);
+        Page<Case> pages = caseServiceImpl.getPage(page, count);
         Map<String, Object> map = new HashMap<>();
         map.put("count", pages.getTotalPages());
         map.put("page", pages.stream().map(Case::getSimple).toList());

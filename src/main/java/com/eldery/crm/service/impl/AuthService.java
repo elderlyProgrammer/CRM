@@ -1,4 +1,4 @@
-package com.eldery.crm.service;
+package com.eldery.crm.service.impl;
 
 import com.eldery.crm.exception.AuthException;
 import com.eldery.crm.jwt.JwtAuthentication;
@@ -6,6 +6,7 @@ import com.eldery.crm.jwt.JwtProvider;
 import com.eldery.crm.jwt.JwtRequest;
 import com.eldery.crm.jwt.JwtResponse;
 import com.eldery.crm.model.User;
+import com.eldery.crm.service.UserService;
 import io.jsonwebtoken.Claims;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,9 @@
 package com.eldery.crm.service;
 
 import com.eldery.crm.dto.CaseRDTO;
-import com.eldery.crm.model.Case;
 import com.eldery.crm.model.Person;
+import com.eldery.crm.service.impl.CaseServiceImpl;
+import com.eldery.crm.service.impl.CaseTypeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
@@ -13,28 +14,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RequiredArgsConstructor
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Ignore
-class CaseServiceTest {
+class CaseServiceImplTest {
 
     @Autowired PersonService personService;
-    @Autowired CaseService caseService;
-    @Autowired CaseTypeService caseTypeService;
+    @Autowired
+    CaseServiceImpl caseServiceImpl;
+    @Autowired
+    CaseTypeServiceImpl caseTypeService;
 
     @Ignore
     @Test
     void addPersonToCase() {
         long caseId = 6;
         long personId = 2;
-        caseService.addPersonToCase(caseId, personId);
-        Person person = caseService.findCaseById(caseId).getPersons().stream()
+        caseServiceImpl.addPersonToCase(caseId, personId);
+        Person person = caseServiceImpl.findCaseById(caseId).getPersons().stream()
                 .filter(x -> x.getId().equals(personId))
                 .findFirst().orElse(null);
         assert person != null;
@@ -56,7 +56,7 @@ class CaseServiceTest {
         caseRDTO.setPersons(Set.of(1L, 2L));
         caseRDTO.setResponsible(Set.of(1L, 2L));
 
-        caseService.createCase(caseRDTO);
+        caseServiceImpl.createCase(caseRDTO);
 
 
     }

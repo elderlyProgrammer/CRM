@@ -2,40 +2,12 @@ package com.eldery.crm.service;
 
 import com.eldery.crm.exception.PositionNotFoundException;
 import com.eldery.crm.model.Position;
-import com.eldery.crm.repository.PositionRepository;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+public interface PositionService {
 
-@Service
-@Setter
-@Getter
-@RequiredArgsConstructor
-public class PositionService {
+    Position findPositionById(Long id);
 
-    private final PositionRepository positionRepository;
+    void removePositionById(Long id) throws PositionNotFoundException;
 
-    public Position findPositionById(Long id) {
-        return positionRepository.findById(id).orElse(null);
-    }
-
-    public void removePositionById(Long id) throws PositionNotFoundException {
-        try {
-            positionRepository.deleteById(id);
-
-        } catch (Exception exception) {
-            throw new PositionNotFoundException();
-        }
-
-
-    }
-
-    public void save(Position position) {
-        positionRepository.save(position);
-    }
-
-
+    void save(Position position);
 }

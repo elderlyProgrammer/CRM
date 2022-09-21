@@ -2,7 +2,7 @@ package com.eldery.crm.controller;
 
 import com.eldery.crm.jwt.JwtAuthentication;
 import com.eldery.crm.model.User;
-import com.eldery.crm.service.AuthService;
+import com.eldery.crm.service.impl.AuthService;
 import com.eldery.crm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

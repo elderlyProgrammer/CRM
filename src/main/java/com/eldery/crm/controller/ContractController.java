@@ -7,10 +7,7 @@ import com.eldery.crm.service.ContractService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +36,25 @@ public class ContractController {
     @GetMapping({"/", ""})
     public ResponseEntity<Map<String, Object>> getPage() {
         return getPageResponseEntity(1, 10);
+    }
+
+    @PostMapping("/addcompany")
+    public void addCompany(@RequestBody Map<String, String> allParams) {
+
+        contractService.addCompanyToContract(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("company")));
+
+    }
+
+    @PostMapping("/addperson")
+    public void addPerson(@RequestBody Map<String, String> allParams) {
+
+        contractService.addPersonToContract(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("person")));
+
+    }
+
+    @PostMapping("/addresponsible")
+    public void addResponsible(@RequestBody Map<String, String> allParams) {
+        contractService.addResponsibleToContract(Long.parseLong(allParams.get("case")), Long.parseLong(allParams.get("responsible")));
     }
 
     private ResponseEntity<Map<String, Object>> getPageResponseEntity (int page, int count) {

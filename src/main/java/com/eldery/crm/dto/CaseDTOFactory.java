@@ -36,13 +36,5 @@ public class CaseDTOFactory {
         return caseDto;
     }
 
-//    public static Case createCase(CaseRDTO caseRDTO) {
-//        return Case.builder()
-//                .description(caseRDTO.getDescription())
-//                .number(caseRDTO.getNumber())
-//                .startDate(caseRDTO.getStartDate())
-//                .endDate(caseRDTO.getEndDate())
-//                .build();
-//    }
 
 }
