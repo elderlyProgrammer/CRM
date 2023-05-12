@@ -3,15 +3,18 @@ package com.eldery.crm.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "cases")
 @Builder
+@Table(name = "cases")
 @AllArgsConstructor
 public class Case extends BaseEntity{
     @Column(name = "description")
@@ -27,11 +30,11 @@ public class Case extends BaseEntity{
     @JoinColumn(name = "case_type_id", referencedColumnName = "id")
     private CaseType caseType;
 
-    @ManyToMany(mappedBy = "cases",fetch = FetchType.EAGER)
-    private Set<Company> companies;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Company company;
 
-    @ManyToMany(mappedBy = "cases", fetch = FetchType.EAGER)
-    private Set<Person> persons;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Person person;
 
     @ManyToMany(mappedBy = "cases", fetch = FetchType.EAGER)
     private Set<User> responsible;
@@ -43,5 +46,6 @@ public class Case extends BaseEntity{
         map.put("number", getNumber());
         return map;
     }
+
 
 }

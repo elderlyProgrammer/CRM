@@ -17,7 +17,7 @@ public class ContractRDTO {
     private Long amount;
     private String number;
 
-    private Set<Long> companies = new HashSet<>();
-    private Set<Long> persons = new HashSet<>();
-    private Set<Long> responsible = new HashSet<>();
+    private Long company;
+    private Long person;
+    private Long responsible;
 }

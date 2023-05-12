@@ -13,4 +13,5 @@ public interface PersonRepository extends JpaRepository<Person, Long > {
 
     List<Person> findByFirstNameContainingOrFirstNameContainsIgnoreCase(String param1, String param2);
     List<Person> findByLastNameContainingOrLastNameContainsIgnoreCase(String param1, String param2);
+
 }

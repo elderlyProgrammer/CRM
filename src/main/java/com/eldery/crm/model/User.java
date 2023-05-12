@@ -35,7 +35,7 @@ public class User extends BaseEntity {
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    private Set<Role> roles;
+    private Set<Role> roles = new java.util.LinkedHashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
@@ -47,10 +47,7 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "case_id", referencedColumnName = "id")})
     private Set<Case> cases;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_contracts",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "contract_id", referencedColumnName = "id")})
+    @OneToMany(mappedBy = "responsible",fetch = FetchType.EAGER)
     private Set<Contract> contracts;
 
     public Set<String> getRoles() {

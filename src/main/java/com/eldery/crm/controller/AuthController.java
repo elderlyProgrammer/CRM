@@ -22,7 +22,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody JwtRequest authRequest, HttpServletResponse response) {
+    public ResponseEntity login(@RequestBody JwtRequest authRequest) {
         try {
             final JwtResponse token = authService.login(authRequest);
             return ResponseEntity.ok(token);

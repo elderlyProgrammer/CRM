@@ -16,7 +16,7 @@ public class CaseRDTO {
     private Date endDate;
     private String number;
     private Long caseType;
-    private Set<Long> companies = new HashSet<>();
-    private Set<Long> persons = new HashSet<>();
-    private Set<Long> responsible = new HashSet<>();
+    private Long company;
+    private Long person;
+    private Set<Long> responsibles;
 }

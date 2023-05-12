@@ -1,8 +1,6 @@
 package com.eldery.crm.dto;
 
 import com.eldery.crm.model.Case;
-import com.eldery.crm.model.Company;
-import com.eldery.crm.model.Person;
 import com.eldery.crm.model.User;
 
 import java.util.stream.Collectors;
@@ -17,16 +15,8 @@ public class CaseDTOFactory {
         caseDto.setNumber(icase.getNumber());
         caseDto.setCaseType(icase.getCaseType().getSimple());
         caseDto.setId(icase.getId());
-        if (icase.getCompanies() != null) {
-            caseDto.setCompanies(icase.getCompanies().stream()
-                    .map(Company::getSimple)
-                    .collect(Collectors.toList()));
-        }
-        if (icase.getPersons() != null) {
-            caseDto.setPersons(icase.getPersons().stream()
-            .map(Person::getSimple)
-            .collect(Collectors.toList()));
-        }
+        caseDto.setCompany(icase.getSimple());
+        caseDto.setPerson(icase.getSimple());
         if (icase.getResponsible() != null) {
             caseDto.setResponsible(icase.getResponsible().stream()
             .map(User::getSimple)

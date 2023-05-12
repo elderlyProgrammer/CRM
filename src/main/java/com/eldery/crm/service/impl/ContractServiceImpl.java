@@ -36,7 +36,7 @@ public class ContractServiceImpl implements ContractService {
     public void addPersonToContract(Long contractId, Long personId) {
         Contract contract = findContractById(contractId);
         Person person = personService.findPersonById(personId);
-        contract.getPersons().add(person);
+        contract.setPerson(person);
         person.getContracts().add(contract);
         contractRepository.save(contract);
         personService.save(person);
@@ -45,7 +45,7 @@ public class ContractServiceImpl implements ContractService {
     public void addCompanyToContract(Long contractId, Long companyId) {
         Contract contract = findContractById(contractId);
         Company company = companyService.findCompanyById(companyId);
-        contract.getCompanies().add(company);
+        contract.setCompany(company);
         company.getContracts().add(contract);
         contractRepository.save(contract);
         companyService.save(company);
@@ -54,30 +54,30 @@ public class ContractServiceImpl implements ContractService {
     public void addResponsibleToContract(Long contractId, Long responsibleId) {
         Contract contract = findContractById(contractId);
         User responsible = userService.findUserById(responsibleId);
-        contract.getResponsible().add(responsible);
+        contract.setResponsible(responsible);
         responsible.getContracts().add(contract);
         contractRepository.save(contract);
         userService.save(responsible);
     }
 
     public void createContract(ContractRDTO contractRDTO) {
-        Set<Person> persons = personService.findAllPersons(contractRDTO.getPersons());
-        Set<Company> companies = companyService.findAllCompanies(contractRDTO.getCompanies());
-        Set<User> responsibles = userService.findAllResponsibles(contractRDTO.getResponsible());
+        Person person = personService.findPersonById(contractRDTO.getPerson());
+        Company company = companyService.findCompanyById(contractRDTO.getCompany());
+        User responsible = userService.findUserById(contractRDTO.getResponsible());
 
         Contract contract = Contract.builder()
                 .description(contractRDTO.getDescription())
                 .number(contractRDTO.getNumber())
                 .amount(contractRDTO.getAmount())
                 .date(contractRDTO.getDate())
-                .companies(companies)
-                .persons(persons)
-                .responsible(responsibles)
+                .company(company)
+                .person(person)
+                .responsible(responsible)
                 .build();
         contractRepository.save(contract);
-        personService.save(persons);
-        companyService.save(companies);
-        userService.save(responsibles);
+        personService.save(person);
+        companyService.save(company);
+        userService.save(responsible);
     }
 
     public long count() {

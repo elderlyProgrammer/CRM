@@ -3,6 +3,7 @@ package com.eldery.crm.repository;
 import com.eldery.crm.model.Company;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.List;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
 
+    @Query("""
+            select c from Company c
+            where c.name like concat('%', ?1, '%') or upper(c.name) like upper(concat('%', ?2, '%'))""")
     List<Company> findByNameContainingOrNameContainsIgnoreCase(String name, String name1);
 
 }

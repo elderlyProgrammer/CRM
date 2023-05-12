@@ -16,22 +16,9 @@ public class ContractDTOFactory {
         contractDto.setDate(contract.getDate());
         contractDto.setNumber(contract.getNumber());
         contractDto.setId(contract.getId());
-        if (contract.getCompanies() != null) {
-            contractDto.setCompanies(contract.getCompanies().stream()
-            .map(Company::getSimple)
-            .collect(Collectors.toSet()));
-        }
-
-        if (contract.getPersons() != null) {
-            contractDto.setPersons(contract.getPersons().stream()
-            .map(Person::getSimple)
-            .collect(Collectors.toSet()));
-        }
-        if (contract.getResponsible() != null) {
-            contractDto.setResponsible(contract.getResponsible().stream()
-            .map(User::getSimple)
-            .collect(Collectors.toSet()));
-        }
+        contractDto.setCompany(contract.getCompany().getSimple());
+        contractDto.setPerson(contract.getPerson().getSimple());
+        contractDto.setResponsible(contract.getResponsible().getSimple());
         return contractDto;
     }
 }

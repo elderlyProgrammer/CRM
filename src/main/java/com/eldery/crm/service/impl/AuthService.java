@@ -27,16 +27,16 @@ public class AuthService {
     private final JwtProvider jwtProvider;
 
     public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException{
-        final User user = userService.findByLogin(authRequest.getLogin());
-        if (user == null) {
+        final User byLogin = userService.findByLogin(authRequest.getLogin());
+        if (byLogin == null) {
             String info = "User: " + authRequest.getLogin() + " not found";
             throw new AuthException(info);
         }
 
-        if (user.getPassword().equals(authRequest.getPassword())) {
-            final String accessToken = jwtProvider.generateAccessToken(user);
-            final String refreshToken = jwtProvider.generateRefreshToken(user);
-            refreshStorage.put(user.getLogin(), refreshToken);
+        if (byLogin.getPassword().equals(authRequest.getPassword())) {
+            final String accessToken = jwtProvider.generateAccessToken(byLogin);
+            final String refreshToken = jwtProvider.generateRefreshToken(byLogin);
+            refreshStorage.put(byLogin.getLogin(), refreshToken);
             return new JwtResponse(accessToken, refreshToken);
         } else {
             throw new AuthException("Wrong password");

@@ -15,8 +15,8 @@ public class ContractDTO extends BaseDTO {
     private Long amount;
     private String number;
 
-    private Set<Map<String, String>> companies = new HashSet<>();
-    private Set<Map<String, String>> persons = new HashSet<>();
-    private Set<Map<String, String>> responsible = new HashSet<>();
+    private Map<String, String> company;
+    private Map<String, String> person;
+    private Map<String, String> responsible;
 
 }

@@ -19,8 +19,8 @@ public class CaseDTO extends BaseDTO {
     private Date endDate;
     private String number;
     private Map<String, String> caseType = new HashMap<>();
-    private List<Map<String, String>> companies;
-    private List<Map<String, String>> persons;
+    private Map<String, String> company;
+    private Map<String, String> person;
     private List<Map<String, String>> responsible;
 
 

@@ -27,14 +27,14 @@ public class Contract extends BaseEntity {
     @Column(name = "number")
     private String number;
 
-    @ManyToMany(mappedBy = "contracts", fetch = FetchType.EAGER)
-    private Set<Company> companies;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Company company;
 
-    @ManyToMany(mappedBy = "contracts",fetch = FetchType.EAGER)
-    private Set<Person> persons;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Person person;
 
-    @ManyToMany(mappedBy = "contracts", fetch = FetchType.EAGER)
-    private Set<User> responsible;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User responsible;
 
 
     @JsonIgnore

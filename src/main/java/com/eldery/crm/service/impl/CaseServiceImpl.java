@@ -36,7 +36,7 @@ public class CaseServiceImpl implements CaseService {
     public void addPersonToCase(Long caseId, Long personId) {
         Case icase = findCaseById(caseId);
         Person person = personService.findPersonById(personId);
-        icase.getPersons().add(person);
+        icase.setPerson(person);
         person.getCases().add(icase);
         save(icase);
         personService.save(person);
@@ -45,7 +45,7 @@ public class CaseServiceImpl implements CaseService {
     public void addCompanyToCase(Long caseId, Long companyId) {
         Case icase = findCaseById(caseId);
         Company company = companyService.findCompanyById(companyId);
-        icase.getCompanies().add(company);
+        icase.setCompany(company);
         company.getCases().add(icase);
         companyService.save(company);
         save(icase);
@@ -63,9 +63,9 @@ public class CaseServiceImpl implements CaseService {
     public void createCase(CaseRDTO caseRDTO) {
 
         CaseType caseType = caseTypeService.findById(caseRDTO.getCaseType());
-        Set<Person> persons = personService.findAllPersons(caseRDTO.getPersons());
-        Set<Company> companies = companyService.findAllCompanies(caseRDTO.getCompanies());
-        Set<User> responsibles = userService.findAllResponsibles(caseRDTO.getResponsible());
+        Person person = personService.findPersonById(caseRDTO.getPerson());
+        Company company = companyService.findCompanyById(caseRDTO.getCompany());
+        Set<User> responsibles = userService.findAllResponsibles(caseRDTO.getResponsibles());
 
         Case newCase = Case.builder()
                 .number(caseRDTO.getNumber())
@@ -73,14 +73,14 @@ public class CaseServiceImpl implements CaseService {
                 .startDate(caseRDTO.getStartDate())
                 .endDate(caseRDTO.getEndDate())
                 .caseType(caseType)
-                .persons(new HashSet<>(persons))
-                .companies(new HashSet<>(companies))
-                .responsible(new HashSet<>(responsibles))
+                .person(person)
+                .company(company)
+                .responsible(responsibles)
                 .build();
         save(newCase);
 
-        personService.save(persons);
-        companyService.save(companies);
+        personService.save(person);
+        companyService.save(company);
         userService.save(responsibles);
 
     }
